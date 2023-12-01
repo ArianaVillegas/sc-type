@@ -37,7 +37,7 @@ gene_sets_prepare <- function(path_to_db_file, cell_type, species="human", map=N
     markers_all = sort(markers_all)
     
     if(length(markers_all) > 0){
-      suppressMessages({markers_all = unique(na.omit(checkGeneSymbols(markers_all, species=species)$Suggested.Symbol))})
+      suppressMessages({markers_all = unique(na.omit(checkGeneSymbols(markers_all, species=species, map=map)$Suggested.Symbol))})
       paste0(markers_all, collapse=",")
     } else {
       ""
