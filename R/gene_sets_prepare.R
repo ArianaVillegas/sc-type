@@ -8,7 +8,7 @@
 # @cell_type - cell type (e.g. Immune system, Liver, Pancreas, Kidney, Eye, Brain)
 #
 
-gene_sets_prepare <- function(path_to_db_file, cell_type){
+gene_sets_prepare <- function(path_to_db_file, cell_type, species="human"){
   
   cell_markers = openxlsx::read.xlsx(path_to_db_file)
   cell_markers = cell_markers[cell_markers$tissueType == cell_type,] 
@@ -22,7 +22,7 @@ gene_sets_prepare <- function(path_to_db_file, cell_type){
     markers_all = sort(markers_all)
     
     if(length(markers_all) > 0){
-      suppressMessages({markers_all = unique(na.omit(checkGeneSymbols(markers_all)$Suggested.Symbol))})
+      suppressMessages({markers_all = unique(na.omit(checkGeneSymbols(markers_all, species=species)$Suggested.Symbol))})
       paste0(markers_all, collapse=",")
     } else {
       ""
@@ -37,7 +37,7 @@ gene_sets_prepare <- function(path_to_db_file, cell_type){
     markers_all = sort(markers_all)
     
     if(length(markers_all) > 0){
-      suppressMessages({markers_all = unique(na.omit(checkGeneSymbols(markers_all)$Suggested.Symbol))})
+      suppressMessages({markers_all = unique(na.omit(checkGeneSymbols(markers_all, species=species)$Suggested.Symbol))})
       paste0(markers_all, collapse=",")
     } else {
       ""
